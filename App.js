@@ -6,6 +6,9 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <Text>Hello from CircleCI!</Text>
+        <Text>Hello from CircleCI!</Text>
+        <Text>Hello from CircleCI!</Text>
+        <Text>Hello from CircleCI!</Text>
       </View>
     );
   }
