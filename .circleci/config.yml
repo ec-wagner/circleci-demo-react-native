@@ -7,23 +7,23 @@ jobs:
     steps:
       - checkout
 
-      - restore_cache:
-          key: yarn-v1-{{ checksum "yarn.lock" }}-{{ arch }}
+      #- restore_cache:
+      #    key: yarn-v1-{{ checksum "yarn.lock" }}-{{ arch }}
 
-      - restore_cache:
-          key: node-v1-{{ checksum "package.json" }}-{{ arch }}
+      #- restore_cache:
+      #    key: node-v1-{{ checksum "package.json" }}-{{ arch }}
 
       - run: yarn install
 
-      - save_cache:
-          key: yarn-v1-{{ checksum "yarn.lock" }}-{{ arch }}
-          paths:
-            - ~/.cache/yarn
+      #- save_cache:
+      #    key: yarn-v1-{{ checksum "yarn.lock" }}-{{ arch }}
+      #    paths:
+      #      - ~/.cache/yarn
 
-      - save_cache:
-          key: node-v1-{{ checksum "package.json" }}-{{ arch }}
-          paths:
-            - node_modules
+      #- save_cache:
+      #    key: node-v1-{{ checksum "package.json" }}-{{ arch }}
+      #    paths:
+      #      - node_modules
 
       - run:
           name: jest tests
@@ -55,15 +55,16 @@ jobs:
       - attach_workspace:
           at: ~/demo-react-native
 
-      - restore_cache:
-          key: bundle-v1-{{ checksum "Gemfile.lock" }}-{{ arch }}
+      #- restore_cache:
+      #    key: bundle-v1-{{ checksum "Gemfile.lock" }}-{{ arch }}
 
       - run: bundle install
+      - run: bundle update fastlane
 
-      - save_cache:
-          key: bundle-v1-{{ checksum "Gemfile.lock" }}-{{ arch }}
-          paths:
-            - vendor/bundle
+      #- save_cache:
+      #    key: bundle-v1-{{ checksum "Gemfile.lock" }}-{{ arch }}
+      #    paths:
+      #      - vendor/bundle
 
       - run:
           name: fastlane tests
