@@ -12,6 +12,7 @@
     "start": "react-native start",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "livetest": "jest --watchAll",
     "test": "node node_modules/jest/bin/jest.js"
   },
   "jest": {
@@ -19,7 +20,7 @@
     "testResultsProcessor": "jest-junit"
   },
   "dependencies": {
-    "react": "16.0.0",
+    "react": "^16.5.0",
     "react-native": "0.50.3"
   }
 }
