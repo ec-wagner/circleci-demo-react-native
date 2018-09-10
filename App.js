@@ -5,10 +5,11 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Hello from CircleCI!</Text>
-        <Text>Hello from CircleCI!</Text>
-        <Text>Hello from CircleCI!</Text>
-        <Text>Hello from CircleCI!</Text>
+        <Text>HELLO WLAD!</Text>
+        <Text>HELLO WLAD!</Text>
+        <Text>HELLO WLAD!</Text>
+        <Text>HELLO WLAD!</Text>
+        <Text>HELLO WLAD!</Text>
       </View>
     );
   }
