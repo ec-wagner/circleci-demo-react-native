@@ -138,6 +138,8 @@ jobs:
             - run:
                 name: merge dev branch into stage
                 command: |
+                    git config unser.name "CircleCI"
+                    git config user.email "CI@users.noreply.github.com"
                     git merge --no-commit dev
                     git commit -m "merge dev into stage"
                     git push
