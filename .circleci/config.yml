@@ -141,6 +141,7 @@ jobs:
                 command: |
                     git config user.name "CircleCI"
                     git config user.email "CI@users.noreply.github.com"
+                    git config --global push.default simple
 
             - run: git checkout stage
             - run: git push
