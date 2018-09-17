@@ -140,6 +140,7 @@ jobs:
                 command: |
                     git config user.name "CircleCI"
                     git config user.email "CI@users.noreply.github.com"
+                    git checkout stage
                     git merge --no-commit dev
                     git commit -m "merge dev into stage"
                     git push
