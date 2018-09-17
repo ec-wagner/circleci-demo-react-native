@@ -32,17 +32,40 @@ workflows:
                 requires:
                     - build
 
+            # PUSH TO STAGE
+            - push_to_stage:
+                filters:
+                    branches:
+                        only: dev
+                requires:
+                    - test_dev_android
+                    - test_dev_ios
+                    - test_dev_web
+
             # INTEGRATION TESTS ANDROID / iOS / WEB
             - test_stage_android:
                 filters:
                     branches:
                         only: stage
 
-            # - test_stage_ios
-            # - test_stage_web
-            #
+            - test_stage_ios:
+                filters:
+                    branches:
+                        only: stage
+
+            - test_stage_web:
+                filters:
+                    branches:
+                        only: stage
+
             # - merge_into_master
-            # - deploy_pre-prod
+
+            # DEPLOY TO PRE-PRODUCTION
+            - deploy_pre_prod:
+                requires:
+                    - test_stage_android
+                    - test_stage_ios
+                    - test_stage_web
 
 
 
@@ -136,6 +159,13 @@ jobs:
                 name: run unit tests
                 command: echo "UNIT TESTS PASS"
 
+
+    # PUSH TO STAGE
+    push_to_stage:
+        working_directory: ~/demo-react-native
+        docker:
+            - image: circleci/node:8
+        steps:
             - run:
                 name: configure git
                 command: |
@@ -151,7 +181,6 @@ jobs:
             # - run: git commit -m "merge dev into stage"
             #
             # - run: git push
-
 
     # UNIT TESTS iOS
     test_dev_ios:
@@ -183,3 +212,31 @@ jobs:
             - run:
                 name: run integration tests
                 command: echo "INTEGRATION TESTS PASS"
+
+    test_stage_ios:
+        working_directory: ~/demo-react-native/ios
+        docker:
+            - image: circleci/node:8
+        steps:
+            - run:
+                name: run integration tests
+                command: echo "INTEGRATION TESTS PASS"
+
+    test_stage_web:
+        working_directory: ~/demo-react-native/android
+        docker:
+            - image: circleci/node:8
+        steps:
+            - run:
+                name: run integration tests
+                command: echo "INTEGRATION TESTS PASS"
+
+    # DEPLOY TO PRE-PRODUCTION
+    deploy_pre_prod:
+        working_directory: ~/demo-react-native/android
+        docker:
+            - image: circleci/node:8
+        steps:
+            - run:
+                name: LET FAIL AS FUCK
+                command: exit 1
