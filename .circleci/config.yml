@@ -21,14 +21,16 @@ workflows:
                 filters:
                     branches:
                         only: dev
-                requires: build
+                requires:
+                    - build
 
             # UNIT TESTS WEB
             - test_dev_web:
                 filters:
                     branches:
                         only: dev
-                requires: build
+                requires:
+                    - build
 
             # INTEGRATION TESTS ANDROID / iOS / WEB
             - test_stage_android:
