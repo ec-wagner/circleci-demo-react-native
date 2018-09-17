@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # DEV CHANGE
+=======
+# DEV CHANGE 2
+>>>>>>> dev
 
 # CircleCI Demo React Native App
 
