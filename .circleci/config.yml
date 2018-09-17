@@ -166,6 +166,8 @@ jobs:
         docker:
             - image: circleci/node:8
         steps:
+            - checkout:
+                path: ~/demo-react-native
             - run:
                 name: configure git
                 command: |
