@@ -8,7 +8,7 @@ workflows:
                     branches:
                         only: dev
 
-            # ANDROID UNIT TESTS
+            # UNIT TESTS ANDROID
             - test_dev_android:
                 filters:
                     branches:
@@ -16,21 +16,26 @@ workflows:
                 requires:
                     - build
 
-            # IOS UNIT TESTS
-            # - test_dev_ios          --| build
-            # - test_dev_web          --| build
+            # UNIT TESTS iOS
+            - test_dev_ios:
+                filters:
+                    branches:
+                        only: dev
+                requires: build
 
-            # MERGE DEV BRANCH INTO STAGE
-            - merge_into_stage:
+            # UNIT TESTS WEB
+            - test_dev_web:
+                filters:
+                    branches:
+                        only: dev
+                requires: build
+
+            # INTEGRATION TESTS ANDROID / iOS / WEB
+            - test_stage_android:
                 filters:
                     branches:
                         only: stage
-                requires:
-                    - test_dev_android
-                    # - test_dev_ios
-                    # - test_dev_web
 
-            - test_stage_android
             # - test_stage_ios
             # - test_stage_web
             #
@@ -89,7 +94,7 @@ jobs:
             - run: echo "BUILD SUCCEEDED!"
 
 
-    # ANDROID UNIT TESTS
+    # UNIT TESTS ANDROID
     test_dev_android:
         working_directory: ~/demo-react-native/android
         docker:
@@ -125,18 +130,43 @@ jobs:
             # - store_artifacts:
             #     path: test-results
 
-            - run: echo "DEV TEST PASS"
-
-
-    # MERGE DEV BRANCH INTO STAGE
-    merge_into_stage:
-        working_directory: ~/demo-react-native
-        docker:
-            - image: circleci/node:8
-        steps:
-            - checkout
             - run:
-                name: merge dev into stage
+                name: run unit tests
+                command: echo "UNIT TESTS PASS"
+            - run:
+                name: merge dev branch into stage
                 command: |
                     git merge --no-commit dev
                     git commit -m "merge dev into stage"
+                    git push
+
+    # UNIT TESTS iOS
+    test_dev_ios:
+        working_directory: ~/demo-react-native/ios
+        docker:
+            - image: circleci/android:api-27-node8-alpha
+        steps:
+            - run:
+                name: run unit tests
+                command: echo "UNIT TESTS PASS"
+
+
+    # UNIT TESTS WEB
+    test_dev_web:
+        working_directory: ~/demo-react-native/web
+        docker:
+            - image: circleci/android:api-27-node8-alpha
+        steps:
+            - run:
+                name: run unit tests
+                command: echo "UNIT TESTS PASS"
+
+    # INTEGRATION TESTS
+    test_stage_android:
+        working_directory: ~/demo-react-native/android
+        docker:
+            - image: circleci/android:api-27-node8-alpha
+        steps:
+            - run:
+                name: run integration tests
+                command: echo "INTEGRATION TESTS PASS"
