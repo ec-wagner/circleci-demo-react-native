@@ -4,7 +4,7 @@ jobs:
     working_directory: ~/demo-react-native
     docker:
       - image: circleci/node:8
-    steps:
+      steps:
       - checkout
 
       #- restore_cache:
