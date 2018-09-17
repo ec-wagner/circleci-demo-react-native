@@ -147,9 +147,10 @@ jobs:
             - run: git push
 
             - run: git merge --no-commit dev
-            - run: git commit -m "merge dev into stage"
-
             - run: git push
+            # - run: git commit -m "merge dev into stage"
+            #
+            # - run: git push
 
 
     # UNIT TESTS iOS
