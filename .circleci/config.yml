@@ -135,21 +135,28 @@ jobs:
             - run:
                 name: run unit tests
                 command: echo "UNIT TESTS PASS"
+
             - run:
-                name: merge dev branch into stage
+                name: configure git
                 command: |
                     git config user.name "CircleCI"
                     git config user.email "CI@users.noreply.github.com"
+
+            - run:
+                name: merge dev branch into stage
+                command: |
                     git checkout stage
                     git merge --no-commit dev
                     git commit -m "merge dev into stage"
-                    git push
+
+            - run: git push
+
 
     # UNIT TESTS iOS
     test_dev_ios:
         working_directory: ~/demo-react-native/ios
         docker:
-            - image: circleci/android:api-27-node8-alpha
+            - image: circleci/node:8
         steps:
             - run:
                 name: run unit tests
