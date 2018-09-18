@@ -1,4 +1,4 @@
-# DEV CHANGE 555
+# CHANGE IT!
 
 # CircleCI Demo React Native App
 
