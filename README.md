@@ -1,4 +1,4 @@
-# CHANGE IT!!!!!
+# CHANGE
 
 # CircleCI Demo React Native App
 
